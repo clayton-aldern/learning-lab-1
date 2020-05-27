@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<head>
+    <title>Moving Bubble Tutorial</title>
+    <link rel="stylesheet" href="style/style.css" type="text/css" media="screen" />
+	<meta charset="utf-8">
+</head>
+
+<body>
+	
+<div id="main-wrapper">
+	<div id="chart"></div>
+</div><!-- @end #main-wrapper -->
+
+
+<script src="js/d3-3-5-5.min.js"></script>
+
+<script>
+
+var margin = {top: 25, right: 50, bottom: 25, left: 50},
+    width = Math.min(400, window.innerWidth - margin.left - margin.right - 10),
+    height = Math.min(400, window.innerHeight - margin.top - margin.bottom - 20);
+    
+var node_radius = 5,
+    padding = 1,
+    cluster_padding = 10,
+    num_nodes = 100;
+
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// Foci
+var foci = {
+    "toppos": { x: 50, y: 50, color: "#FFAE0C" },
+    "leftpos": { x: 150, y: 150, color: "#32CD32" },
+    "rightpos": { x: 250, y: 250, color: "#f15946" },
+    "bottompos": { x: 350, y: 350, color: "#53b3cb" },
+};
+
+// Create node objects
+var nodes = d3.range(0, num_nodes).map(function(o, i) {
+	return {
+		id: "node" + i,
+		x: foci.toppos.x + Math.random(),
+		y: foci.toppos.y + Math.random(),
+		radius: node_radius,
+		choice: "toppos",
+	}
+});
+
+
+// Force-directed layout
+var force = d3.layout.force()
+	.nodes(nodes)
+	.size([width, height])
+	.gravity(0)
+	.charge(0)
+	.friction(.85)
+	.on("tick", tick)
+	.start();
+    
+// Draw circle for each node.
+var circle = svg.selectAll("circle")
+	.data(nodes)
+  .enter().append("circle")
+	.attr("id", function(d) { return d.id; })
+	.attr("class", "node")
+	.style("fill", function(d) { return foci[d.choice].color; });    
+
+// For smoother initial transition to settling spots.
+circle.transition()
+	.duration(900)
+	.delay(function(d,i) { return i * 5; })
+	.attrTween("r", function(d) {
+		var i = d3.interpolate(0, d.radius);
+		return function(t) { return d.radius = i(t); };
+	});
+
+
+// Run function periodically to make things move.
+var timeout;
+function timer() {
+    
+    // Random place for a node to go
+    var choices = d3.keys(foci);
+    var foci_index = Math.floor( Math.random() * choices.length );
+    var choice = d3.keys(foci)[foci_index];
+    
+    // Update random node
+    var random_index = Math.floor( Math.random() * nodes.length );
+	nodes[random_index].cx = foci[choice].x;
+	nodes[random_index].cy = foci[choice].y;
+	nodes[random_index].choice = choice;
+    
+    force.resume();
+    
+    // Run it again in a few seconds.
+    timeout = setTimeout(timer, 500);
+}
+
+timeout = setTimeout(timer, 500);
+
+
+//
+// Force-directed boiler plate functions
+//
+
+
+function tick(e) {
+  circle
+	.each(gravity(.051 * e.alpha))
+  	.each(collide(.5))
+  	.style("fill", function(d) { return foci[d.choice].color; })
+    .attr("cx", function(d) { return d.x; })
+    .attr("cy", function(d) { return d.y; });
+}
+
+
+// Move nodes toward cluster focus.
+function gravity(alpha) {
+  return function(d) {
+    d.y += (foci[d.choice].y - d.y) * alpha;
+    d.x += (foci[d.choice].x - d.x) * alpha;
+  };
+}
+
+
+
+// Resolve collisions between nodes.
+function collide(alpha) {
+  var quadtree = d3.geom.quadtree(nodes);
+  return function(d) {
+	  var r = d.radius + node_radius + Math.max(padding, cluster_padding),
+        nx1 = d.x - r,
+        nx2 = d.x + r,
+        ny1 = d.y - r,
+        ny2 = d.y + r;
+    quadtree.visit(function(quad, x1, y1, x2, y2) {
+      if (quad.point && (quad.point !== d)) {
+        var x = d.x - quad.point.x,
+            y = d.y - quad.point.y,
+            l = Math.sqrt(x * x + y * y),
+            r = d.radius + quad.point.radius + (d.choice === quad.point.choice ? padding : cluster_padding);
+        if (l < r) {
+          l = (l - r) / l * alpha;
+          d.x -= x *= l;
+          d.y -= y *= l;
+          quad.point.x += x;
+          quad.point.y += y;
+        }
+      }
+      return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+    });
+  };
+}    
+    
+</script>
+
+
+</body>

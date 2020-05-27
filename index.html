@@ -1,0 +1,245 @@
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11"/>
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="reveal.js/css/theme/black.css">
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css" />
+    <link rel="stylesheet" href="reveal.js/css/custom-gc.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/llq8qff.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+
+<section class="center">
+	<h1>It's usually possible</h1>
+	<h3>Some questions to ask yourself when data-reporting a story</h3>
+	<p style="margin-top:4em">
+		<small>A Little Learning Lab by <a href="https://claytonaldern.com" style="color:#FF7700">Clayton Aldern</a> for <a href="https://www.grist.org/" style="color:#FF7700">Grist</a></small>
+		<a href="https://www.grist.org/">
+		<img data-src="imgs/2000x1628-transparent.png" alt="Grist" style="float:right;width:200px;">
+		</a>
+	</p>
+</section>
+
+
+<section>
+    <h3>What is data reporting?</h3>
+    <div class="row no-margin-top">
+		<div class="col-50">
+			<div class="fragment step-fade-in-then-out">
+				<p>I'm not sure; I just thought it sounded good.</p>
+				<p>I think it mostly means applying the tools of reporting to the problems of data science.</p>
+				<p>We usually think of data journalism the other way around, i.e. as complementing the tools of reporting with contemporary analytic techniques.</p>
+			</div>
+			<div class="fragment step-fade-in-then-out">
+				<p>The point is: You already know how to do this.</p>
+				<p>Why let data problems off the hook? You wouldn't do the same with your sources.</p>
+			</div>
+        </div>
+        <div class="fig-container no-margin-top" data-file="d3-fig/gooey.html" data-style="width: 75%"></div>
+    </div>
+</section> 
+
+<section class="center">
+	<h2>Today: some questions to ask</h2>
+	<p class="fragment fade-in">Next time: some tools to use</p>
+</section>
+
+<section>
+    <section>
+        <h3>Question 1: Do I need (more) data?</h3>
+        <div class="row no-margin-top">
+            <div class="col-50">
+                <div class="fragment step-fade-in-then-out">
+                    <p>That is, do I need data to answer a question I'm posing in this story?</p>
+                    <p>Ask yourself this question when you're starting to feel a hunch coming on.</p>
+                    <p>'Data' refers to both qualitative and quantitative information.</p>
+                </div>
+            </div>
+            <div class="fig-container no-margin-top" data-file="d3-fig/bubbles.html"></div>
+        </div>
+    </section>
+    <section>
+        <h3>Answer: ¯\_(ツ)_/¯</h3>
+        <div class="fragment step-fade-in-then-out">
+            <div class="row no-margin-top">
+                <div class="col-50">
+                    <p>I dunno. It's your story. If you're Tom Friedman or David Brooks, why bother?</p>
+                    <p>For the rest of us, that 'hunch' might also be viewed as a 'hypothesis'. So: The scientific method might be helpful here.</p>
+                    <p>Question 1 rephrased, maybe: What would it take to prove my hunch wrong?</p>
+                </div>
+                <div class="col-50"><br><img src="imgs/brooks.png"></div>
+            </div>
+        </div>
+    </section>
+    <section class="center">
+        <h2>The point: Data are just other sources. Interrogate them accordingly.</h2>
+        <p class="fragment fade-in">Which brings us to Question 2.</p>
+    </section>
+</section> 
+
+<section>
+    <section>
+        <h3>Question 2: What else might explain my observations?</h3>
+        <div class="row no-margin-top">
+                <div class="fragment step-fade-in-then-out">
+                    <p><strong>Science (and reporting?) advances through falsification, not discovery.</strong></p>
+                    <p>But: Multiple hypothetical processes can lead to the same observations.</p>
+                    <p>And: Multiple models can be consistent with single processes.</p>
+                    <p>And: Multiple hypotheses (explanations) can be consistent with single processes.</p>
+                </div>
+                <div class="fragment step-fade-in-then-out">
+                    <a href="https://xcelab.net/rm/statistical-rethinking/"><img src="imgs/models.png" height="500px"></a>
+                </div>
+        </div>
+    </section>
+    <section>
+        <h3>So ... statistics? Null hypothesis significance testing?</h3>
+        <div class="row no-margin-top">
+            <div class="col-50">
+                <div class="fragment step-fade-in-then-out">
+                    <p>Not really. We're actually talking about the opposite of p-values.</p>
+                    <p>For the STS nerds in the room, we want a more purely Popperian mode of falsification.</p>
+                    <p>Yes, you're challenging prevailing logic in your reporting. <strong>But to make it water-tight, you're also trying to prove yourself wrong.</strong></p>
+                </div>
+            </div>
+            <div class="fig-container no-margin-top" data-file="d3-fig/bubbles.html"></div>
+        </div>
+    </section>
+</section>
+
+<section class="center">
+	<h2>That's the theory, at least.</h2>
+	<p class="fragment fade-in">In practice...</p>
+</section>
+
+<section>
+    <section>
+        <h3>Question 3a: What do we already have?</h3>
+        <div class="row no-margin-top">
+            <div class="fragment step-fade-in-then-out">
+                <p>Table in a PDF? Data.</p>
+                <p>Folder of PDFs? Data.</p>
+                <p>Directory of files on a website? Also data.</p>
+                <p>Text on a website? Data. (Has it changed over time?)</p>
+                <p>Cat photos? Obviously data.</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <img src="imgs/cats.gif">
+    </section>
+    <section class="center">
+        <h2>Often, structured data already exist. You just have to <strong>dig</strong> for the structure.</h2>
+        <p class="fragment fade-in">Not really sure where this metaphor is going...</p>
+    </section>
+    <section>
+        <h3>Question 3b: What's missing?</h3>
+        <div class="row no-margin-top">
+            <div class="fragment step-fade-in-then-out">
+                <p>Or: What assumptions—explicit or implicit—are you making?</p>
+                <p>The data are probably out there.</p>
+                <p>When in doubt, Google (er, <a href="https://duckduckgo.com" style="color:#FF7700">DuckDuckGo</a>) is your friend.</p>
+                <p>And: Don't forget about your browser's Inspect tool.</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <img src="imgs/google.gif">
+    </section>
+    <section>
+        <a href="https://datasetsearch.research.google.com/"><img src="imgs/google-data.gif"></a>
+    </section> 
+    <section>
+        <img src="imgs/inspect-flat.png" height="500px">
+    </section>
+    <section>
+        <img src="imgs/inspect.gif">
+    </section>
+</section>
+
+<section class="center">
+	<h2>(Of course, it's not all about scraping.)</h2>
+</section>
+
+<section>
+    <h3>Question 4: Not really a question. More like a set of sub-questions to ask at each decision point.</h3>
+    <div class="row no-margin-top">
+        <ul>
+            <li>What is my hypothesis?</li>
+            <li>How can I test it?</li>
+            <li>Does my result suggest causation—or merely a sad case of correlation?</li>
+            <li>Is the correlation still interesting?</li>
+            <li>Did that person just lie to me?</li>
+            <li>Has this thing changed over time?</li>
+            <li>Would building a model help tell the story more clearly?</li>
+            <li>More...</li>
+        </ul>
+    </div>
+</section> 
+
+<section>
+    <h3>Question 5: Do I need (more) data?</h3>
+    <div class="row no-margin-top">
+        <div class="col-50">
+            <p>Yes, this question is the same as Question 1. I have to give this presentation in 10 minutes.</p>
+            <p>What I'm trying to say is: I'm not particularly interested in the deification of quantitative information.</p>
+            <p>In fact, I think leaning on constructions of so-called 'objective' realities via data analysis can be quite dangerous!</p>
+            <p>Really, the question here is: What will make the story the strongest?</p>
+        </div>
+        <div class="fig-container no-margin-top" data-file="d3-fig/bubbles.html"></div>
+    </div>
+</section> 
+
+
+<section class="center">
+	<h2>Thanks!</h2>
+	<p>
+	Contact: <a href="mailto:caldern@grist.org" style="color:#FF7700">Clayton Aldern</a> | <a href="https://www.grist.org" style="color:#FF7700">Grist</a>
+	</p>
+</section>
+
+
+</div> <!-- slides -->
+</div> <!-- Reveal -->
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script>
+
+// Full list of configuration options available at:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+    controls: true,
+    controlsTutorial: false,
+    controlsLayout: 'bottom-right',
+    navigationMode: 'default',
+    controlsBackArrows: 'visible',
+    progress: true,
+    history: true,
+    center: false,
+    transition: 'fade',
+
+    // // optional configurations for reveald3
+    reveald3: {
+         runLastState: true, //default true
+         keepIframe: false, // default: false
+         mapPath: false, // default: false
+         tryFallbackURL: false, //default false
+         disableCheckFile: false, //default false
+    },
+
+    // Reveal.js plugins
+    dependencies: [
+
+        { src: 'reveal.js/js/reveald3/reveald3.js' },
+
+    ]
+});
+
+</script>
+</body>
+</html>

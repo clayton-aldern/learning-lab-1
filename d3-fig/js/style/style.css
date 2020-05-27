@@ -1,0 +1,476 @@
+/* #Reset & Basics (Inspired by E. Meyers)
+================================================== */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block; }
+body {
+    line-height: 1; }
+ol, ul {
+    list-style: none; }
+blockquote, q {
+    quotes: none; }
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none; }
+table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+
+
+/*        #sidebar { display: none; }*/
+
+body {
+font-family: 'Raleway','Inconsolata', Monaco, "Lucida Console", Consolas, "Courier New";
+/*    background: #58585B;*/
+/*    padding-top: 5rem;*/
+/*    background: #e8e8e8;*/
+}
+a {
+font-style: normal;
+text-decoration: underline;
+color: #000;
+}
+#main-wrapper {
+/* max-width: 670px; */
+ max-width: 1024px; 
+/*    max-width: 94%;*/
+margin: 10px auto;
+}
+#header {
+margin-bottom: 10px;
+}
+
+.clr { clear: both; }
+.centered { text-align: center; }
+.hidden  { 
+display: none; 
+pointer-events: none;
+}
+
+/* Text
+============================ */
+
+h1 {
+font-family: 'Raleway','Inconsolata', Monaco, "Lucida Console", Consolas, "Courier New";
+font-size: 25px;
+font-style: normal;
+text-transform: uppercase;
+margin: 0 0 6px 0px;
+}
+h2 {
+    font-family: 'Raleway','Inconsolata', Monaco, "Lucida Console", Consolas, "Courier New" !important;
+    font-size: 1.8rem !important;
+    text-transform: uppercase !important;
+    margin-bottom: .25rem;
+    text-align: center;
+    margin: 25px auto 6px auto;
+}
+h3 {
+text-transform: uppercase;
+font-size: 1em;
+padding: 3px 0px;
+/*    margin: -5px 0 0px 0;*/
+font-style: normal;
+}
+.subheader text {
+font-size: 14px;
+text-transform: uppercase;
+font-weight: bold;
+}
+h4 {
+    font-family: "Raleway","Mercury SSm A", "Mercury SSm B";
+    font-style: italic;
+    font-weight: 400;
+/*    font-size: .9em;*/
+/*    font-size: 14px;*/
+    line-height: 1.4em;
+    text-align: center;
+}
+h5 {
+	font-size: .9rem;
+	line-height: 1.4em;
+}
+
+
+
+/* Controls
+============================ */
+
+#update {
+position: relative;
+/*    width: 825px;*/
+z-index: 100;
+margin: 0px auto 20px auto;
+}
+.buttons {
+float: left;
+margin-right: 50px;
+}
+.button {
+width: 85px;
+padding: 5px 5px;
+margin-right: 10px;
+cursor: pointer;
+text-align: center;
+font-size: .9em;
+border: 1px solid #e0e0e0;
+float: left;
+-moz-border-radius: 6px;
+border-radius: 6px;
+}
+.button:hover {
+background: #e0e0e0;
+}
+.button.current {
+background: #000;
+color: #fff;
+}
+
+#current_time {
+font-family: 'Inconsolata', Monaco, "Lucida Console", Consolas, "Courier New";
+font-size: 2.5rem;
+color: #000;
+text-align: center;
+}
+
+#nodecolor {
+    font-family: 'Inconsolata', Monaco, "Lucida Console", Consolas, "Courier New";
+    font-size: .9rem;
+    text-transform: uppercase;
+    margin: 10px auto 6px auto;
+    width: 203px;
+}
+    #nodecolor .colorbutton {
+        padding: 3px 3px;
+        text-align: center;
+        border: 1px solid #ccc;
+        cursor: pointer;
+		float: left;
+		width: 60px;
+    }
+    #nodecolor .colorbutton.act {
+        border-right: none;
+    }
+	#nodecolor .colorbutton.score {
+		border-left: none;
+    }
+    #nodecolor .colorbutton.current {
+        color: #fff;
+        background: #799fd2;
+		border: 1px solid #799fd2;
+    }
+
+#speed {
+    font-family: 'Inconsolata', Monaco, "Lucida Console", Consolas, "Courier New";
+    font-size: .9rem;
+    text-transform: uppercase;
+    margin: 10px auto 6px auto;
+    width: 203px;
+}
+    #speed .togglebutton {
+        padding: 3px 3px;
+        text-align: center;
+        border: 1px solid #ccc;
+        cursor: pointer;
+		float: left;
+		width: 60px;
+    }
+    #speed .togglebutton.slow {
+        border-right: none;
+    }
+	#speed .togglebutton.fast {
+		border-left: none;
+    }
+    /*#speed .togglebutton.pause {
+        border-right: none;
+    }*/
+    #speed .togglebutton.current {
+        color: #fff;
+        background: #000;
+		border: 1px solid #000;
+    }
+
+#resetbutton a {
+    font-size: .9rem;
+	line-height: 1.4em;
+    /*text-transform: uppercase;*/
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+#resetbutton a:hover {
+    border-bottom: 1px solid #000;
+}
+
+
+#note { 
+position: relative;
+color: #fff;
+
+font-family: "Mercury SSm A", "Mercury SSm B", Georgia, serif;
+font-style: italic;
+font-weight: 400;
+font-size: 1rem;
+line-height: 1.4em;
+text-align: center;
+}
+
+
+#cite {
+position: absolute;
+border-top: 1px solid #ccc;
+padding-top: 20px;
+top: 640px;
+font-size: 12px;
+line-height: 1.4em;
+width: 259px;
+}
+
+
+/* Chart
+============================ */
+
+#chart {
+z-index: 1;
+position: relative;
+}
+
+@media only screen and (min-width: 601px) {
+/*    #chart { margin-top: -100px; }*/
+}
+
+
+text.descrip tspan {
+font-size: 1em;
+}
+.axis text {
+font-family: 'Raleway','Inconsolata', Monaco, "Lucida Console", Consolas, "Courier New";
+font-size: 1.3em;
+}
+text.axistitle {
+text-anchor: start;
+font-size: .8rem;
+text-transform: uppercase;
+}
+text.axislabel { font-size: .8rem; }
+text.lastann { 
+font-size: .95em;
+/*	text-transform: uppercase;*/
+}
+text.hour {
+fill: #000;
+font-size: .9em;
+}
+text.actlabel {
+font-size: 1.1rem;
+font-weight: bold; 
+fill: #000;
+/* text-transform: uppercase; */
+}
+text.decade {
+font-weight: bold;
+font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 500px) {
+text.actlabel {
+    font-size: .9em;
+}
+#current_time {
+    font-size: 2rem;
+}
+}
+
+.fcntlabel text.cnt, .mcntlabel text.cnt {
+font-size: 1.2rem;
+fill: #000;
+}
+text.sublabel {
+font-size: .75rem;
+}
+
+.state rect.equal {
+fill: none;
+stroke: #ccc;
+stroke-width: .5px;
+}
+
+.state rect.scaled {
+fill: #028f88;
+fill-opacity: .6;
+/*    stroke: #fff;*/
+}
+.state text.statelabel {
+fill: #fff;
+font-size: .9rem;
+}
+
+.axis path,
+.axis line {
+fill: none;
+stroke: #666;
+stroke-width: 1px;
+shape-rendering: crispEdges;
+}
+.x.axis path {
+display: none;
+}
+/*.y.axis line { stroke-dasharray: 1 2; }*/
+.x.axis line { stroke: #333; }
+.y.axis line { stroke: #e0e0e0; }
+.y.axis path {
+display: none;
+}
+.y.axis.simple text {
+display: none;
+}
+.baseline line {
+/*    stroke: #ea19e1;*/
+stroke: #000;
+stroke-width: 3px;
+}
+.line, .separator {
+fill: none;
+stroke-width: 1px;
+stroke: #ccc;
+}
+
+.overlay {
+fill: none;
+pointer-events: all;
+z-index: 1;
+}
+
+
+/* Annotation
+============================ */
+
+
+.annog rect {
+stroke: #999;
+stroke-width: 1px;
+fill: none;
+}
+
+.sectionlabel {
+text-transform: uppercase;
+font-size: 1.3em;
+text-anchor: middle;
+}
+
+#tooltip {
+text-transform: uppercase;
+text-anchor: middle;
+font-size: 1.0em;
+font-family: 'Inconsolata', Monaco, "Lucida Console", Consolas, "Courier New";
+pointer-events: none;
+z-index: 101;
+text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+/*    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);*/
+}
+#tooltip h3 { 
+font-size: 14px; margin: 0 0 4px 0; 
+line-height: 1.2em;
+}
+
+.desc {
+font-family: "Mercury SSm A", "Mercury SSm B";
+font-style: italic;
+font-weight: 400;
+font-size: .9em;
+line-height: 1.4em;
+margin: 0 auto;
+}
+
+line.annotation {
+stroke: #ccc;
+stroke-dasharray: 5,2;
+stroke-width: 1.2px;
+}
+text.annotation, #line-chart .agehighlight text {
+font-family: 'Inconsolata', Monaco, "Lucida Console", Consolas, "Courier New";
+font-size: 14px;
+fill: #444;
+text-anchor: end;
+}
+text.descrip {
+font-family: "Mercury SSm A", "Mercury SSm B";
+font-style: italic;
+font-weight: 400;
+font-size: 13px;
+line-height: 1.4em;
+}
+
+
+:root {
+  --line-chart-color: #666;
+  --annotation-context-color: #666;
+  --annotation-above-color: #666;
+  --annotation-anomaly-color: #666;
+}
+.annotation path {
+/*      stroke: var(--annotation-context-color);*/
+stroke: #000000;
+fill: none;
+}
+
+.annotation:not(.above):not(.anomaly) path {
+/*      stroke-dasharray: 1,2;*/
+    stroke-width: 1.5px;
+}
+
+.annotation text {
+/*      fill: #666;*/
+/*      text-transform: uppercase;*/
+  text-shadow: 0 3px 0 #fff, 3px 0 0 #fff, 0 -3px 0 #fff, -3px 0 0 #fff;
+}
+.annotation .annotation-note-content .annotation-note-title {
+    fill: #666;
+    text-transform: uppercase;
+    font-size: .95em;
+}
+.annotation .annotation-note-content .annotation-note-label {
+    font-size: 1.1em;
+    font-weight: bold;
+    
+}
+
+.annotation.above path {
+  stroke: var(--annotation-above-color);
+}
+
+.annotation.above text {
+  fill: #666;
+}
+
+.annotation.anomaly path {
+  stroke: var(--annotation-anomaly-color);
+  stroke-width: 2px;
+}
+
+.annotation.anomaly text {
+  fill: #666;
+}
+
+.annotation-note-bg {
+  fill: rgba(0, 0, 0, 0);
+}
+
+.annotation-note-title {
+    text-transform: none;
+    fill: #000;
+/*        font-size: .9em;*/
+/*      font-weight: bold;*/
+}
+
+text.title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
